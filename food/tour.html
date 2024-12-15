@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Website</title>
+  <style>
+    :root {
+      --bg-color: #f0f0f0;
+      --text-dark: #333;
+      --text-light: #666;
+      --accent-color: #0077b6;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-color);
+      color: var(--text-dark);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .package-carousel {
+      display: flex;
+      animation: scroll 30s linear infinite;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      margin-bottom: 40px;
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .package-card {
+      flex: 0 0 300px;
+      margin-right: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      scroll-snap-align: start;
+      transition: transform 0.3s;
+    }
+
+    .package-card:hover {
+      transform: scale(1.05);
+    }
+
+    .package-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .package-content {
+      padding: 20px;
+    }
+
+    .package-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: var(--text-dark);
+    }
+
+    .package-details {
+      font-size: 16px;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+
+    .package-price {
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--accent-color);
+      margin-bottom: 10px;
+    }
+
+    .package-rating {
+      font-size: 16px;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+
+    .package-duration,
+    .package-location {
+      font-size: 16px;
+      color: var(--text-light);
+      margin-bottom: 10px;
+    }
+
+    .package-book-btn {
+      display: inline-block;
+      padding: 10px 15px;
+      background: var(--accent-color);
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+      font-size: 14px;
+      transition: background-color 0.3s;
+    }
+
+    .package-book-btn:hover {
+      background-color: #005a8c;
+    }
+
+    .testimonial-carousel {
+      display: flex;
+      animation: testimonial-scroll 30s linear infinite;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      margin-bottom: 40px;
+    }
+
+    @keyframes testimonial-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .testimonial-card {
+      flex: 0 0 300px;
+      margin-right: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      scroll-snap-align: start;
+      padding: 20px;
+    }
+
+    .testimonial-content {
+      font-size: 16px;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+
+    .testimonial-author {
+      font-size: 18px;
+      font-weight: bold;
+      color: var(--text-dark);
+    }
+
+    .package-highlights {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .package-highlight {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    .package-highlight img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .package-highlight-title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .package-highlight-description {
+      font-size: 16px;
+      color: var(--text-light);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Discover Your Next Adventure</h1>
+    <div class="package-carousel">
+      <!-- Travel package cards will be dynamically generated here -->
+    </div>
+
+    <h2>What Our Customers Say</h2>
+    <div class="testimonial-carousel">
+      <!-- Testimonial cards will be dynamically generated here -->
+    </div>
+
+    <h2>Package Highlights</h2>
+    <div class="package-highlights">
+      <!-- Package highlight cards will be dynamically generated here -->
+    </div>
+  </div>
+
+  <script>
+    const packages = [
+      {
+        image: './image3/1.jpg',
+        title: 'Florence',
+        details: 'Explore the rich history and art of this iconic Italian city.',
+        price: '$850',
+        rating: '8.7 Superb',
+        duration: '10 Days',
+        location: 'Europe'
+      },
+      {
+        image: './image3/2.jpg',
+        title: 'The Bahamas',
+        details: 'Bask in the sun, swim in the crystal-clear waters, and enjoy the island life.',
+        price: '$1350',
+        rating: '8.8 Superb',
+        duration: '7 Days',
+        location: 'Maldives'
+      },
+      {
+        image: './image3/3.jpg',
+        title: 'Singapore',
+        details: 'Experience the vibrant blend of modernity and diverse cultures in this city-state.',
+        price: '$350',
+        rating: '9.2 Superb',
+        duration: '14 Days',
+        location: 'Asia'
+      },
+      {
+        image: './image3/4.jpg',
+        title: 'Ankaran',
+        details: 'Discover the natural beauty and charming coastal town of Ankaran, Slovenia.',
+        price: '$350',
+        rating: '7.2 Superb',
+        duration: '5 Days',
+        location: 'Slovenia'
+      },
+      {
+        image: './image3/7.jpg',
+        title: 'Ankaran',
+        details: 'Discover the natural beauty and charming coastal town of Ankaran, Slovenia.',
+        price: '$350',
+        rating: '7.2 Superb',
+        duration: '5 Days',
+        location: 'Slovenia'
+      },
+      {
+        image: './image3/6.jpg',
+        title: 'Ankaran',
+        details: 'Discover the natural beauty and charming coastal town of Ankaran, Slovenia.',
+        price: '$350',
+        rating: '7.2 Superb',
+        duration: '5 Days',
+        location: 'Slovenia'
+      },
+      {
+        image: './image3/5.jpg',
+        title: 'Brooklyn Bridge',
+        details: 'Explore the iconic Brooklyn Bridge and immerse yourself in the lively atmosphere of New York.',
+        price: '$910',
+        rating: '9.0 Superb',
+        duration: '14 Days',
+        location: 'America'
+      }
+    ];
+
+    const testimonials = [
+      {
+        content: 'I had an amazing experience with this travel company. They made planning my trip a breeze and the destination exceeded all my expectations.',
+        author: 'John Doe'
+      },
+      {
+        content: 'The customer service was top-notch, and the travel package was a great value for the money. I would highly recommend this company to anyone.',
+        author: 'Jane Smith'
+      },
+      {
+        content: 'This was my first time booking with this travel company, and I was blown away by the attention to detail and the seamless experience from start to finish.',
+        author: 'Michael Johnson'
+      },
+      {
+        content: 'I was hesitant at first, but the travel company exceeded all my expectations. The trip was well-organized, and I had an unforgettable time.',
+        author: 'Sarah Lee'
+      }
+    ];
+
+    const packageHighlights = [
+      {
+        image: './image3/7.jpg',
+        title: 'Explore the Canals of Venice',
+        description: 'Take a romantic gondola ride through the serene canals of Venice and admire the stunning architecture.'
+      },
+      {
+        image: './image3/6.jpg',
+        title: 'Hike the Cliffs of Moher',
+        description: 'Witness the breathtaking views of the Irish coastline as you hike along the iconic Cliffs of Moher.'
+      },
+      {
+        image: './image3/4.jpg',
+        title: 'Marvel at the Northern Lights',
+        description: 'Venture to Iceland and witness the mesmerizing display of the Aurora Borealis, a natural light show in the night sky.'
+      },
+      {
+        image: './image3/5.jpg',
+        title: 'Explore Machu Picchu',
+        description: 'Discover the ancient Inca citadel of Machu Picchu, one of the New Seven Wonders of the World.'
+      }
+    ];
+
+    const carouselContainer = document.querySelector('.package-carousel');
+    const testimonialContainer = document.querySelector('.testimonial-carousel');
+    const highlightContainer = document.querySelector('.package-highlights');
+
+    packages.forEach(package => {
+      const packageCard = document.createElement('div');
+      packageCard.classList.add('package-card');
+
+      packageCard.innerHTML = `
+        <img src="${package.image}" alt="${package.title}">
+        <div class="package-content">
+          <h2 class="package-title">${package.title}</h2>
+          <p class="package-details">${package.details}</p>
+          <p class="package-price">${package.price}</p>
+          <p class="package-rating">${package.rating}</p>
+          <p class="package-duration">Duration: ${package.duration}</p>
+          <p class="package-location">Location: ${package.location}</p>
+          <button class="package-book-btn">Book Now</button>
+        </div>
+      `;
+
+      carouselContainer.appendChild(packageCard);
+    });
+
+    testimonials.forEach(testimonial => {
+      const testimonialCard = document.createElement('div');
+      testimonialCard.classList.add('testimonial-card');
+
+      testimonialCard.innerHTML = `
+        <p class="testimonial-content">${testimonial.content}</p>
+        <p class="testimonial-author">- ${testimonial.author}</p>
+      `;
+
+      testimonialContainer.appendChild(testimonialCard);
+    });
+    
+    packageHighlights.forEach(highlight => {
+      const highlightCard = document.createElement('div');
+      highlightCard.classList.add('package-highlight');
+
+      highlightCard.innerHTML = `
+        <img src="${highlight.image}" alt="${highlight.title}">
+        <h3 class="package-highlight-title">${highlight.title}</h3>
+        <p class="package-highlight-description">${highlight.description}</p>
+      `;
+
+      highlightContainer.appendChild(highlightCard);
+    });
+  </script>
+</body>
+</html>
